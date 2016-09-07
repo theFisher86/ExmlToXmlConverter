@@ -33,6 +33,7 @@ Partial Class Form1
         Me.dlgExmlToXml.AddExtension = False
         Me.dlgExmlToXml.FileName = "ExmlFile"
         Me.dlgExmlToXml.Filter = "EXML Files|*.exml|All Files|*.*"
+        Me.dlgExmlToXml.Multiselect = True
         Me.dlgExmlToXml.RestoreDirectory = True
         Me.dlgExmlToXml.Title = "Choose exml File"
         '
@@ -59,6 +60,7 @@ Partial Class Form1
         Me.dlgXmlToExml.AddExtension = False
         Me.dlgXmlToExml.FileName = "XMLFile"
         Me.dlgXmlToExml.Filter = "XML Files|*.xml|All Files|*.*"
+        Me.dlgXmlToExml.Multiselect = True
         Me.dlgXmlToExml.RestoreDirectory = True
         Me.dlgXmlToExml.Title = "Choose XML File"
         '
@@ -70,7 +72,7 @@ Partial Class Form1
         Me.Controls.Add(Me.btnXmlToExml)
         Me.Controls.Add(Me.btnExmlToXml)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "exml Converter"
         Me.ResumeLayout(False)
 
     End Sub
