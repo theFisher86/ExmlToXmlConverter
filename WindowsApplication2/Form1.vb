@@ -1,9 +1,12 @@
 ﻿Public Class Form1
-    Private Sub btnChooseFile_Click(sender As Object, e As EventArgs) Handles btnExmlToXml.Click
+    Dim method As String
+    Private Sub btnChooseFile_Click(sender As Object, e As EventArgs) Handles btnExmlToXmlNew.Click
+        method = "new"
         dlgExmlToXml.ShowDialog()
     End Sub
 
-    Private Sub btnXmlToExml_Click(sender As Object, e As EventArgs) Handles btnXmlToExml.Click
+    Private Sub btnXmlToExml_Click(sender As Object, e As EventArgs) Handles btnXmlToExmlNew.Click
+        method = "new"
         dlgXmlToExml.ShowDialog()
     End Sub
 
@@ -14,7 +17,11 @@
         Debug.Print(dlgExmlToXml.ToString)
         For Each file In dlgExmlToXml.FileNames
             RawExmlString = My.Computer.FileSystem.ReadAllText(dlgExmlToXml.FileName)
-            ParsedXML = ParseExmlString(RawExmlString)
+            If method = "new" Then
+                ParsedXML = ParseExmlStringNew(RawExmlString)
+            Else
+                ParsedXML = ParseExmlStringOld(RawExmlString)
+            End If
             ParsedXML.Save(dlgExmlToXml.FileName & ".xml")
         Next
     End Sub
@@ -25,7 +32,11 @@
         Dim file As String
         For Each file In dlgXmlToExml.FileNames
             XMLString = My.Computer.FileSystem.ReadAllText(dlgXmlToExml.FileName)
-            RevertedExml = RevertXmltoExml(XMLString)
+            If method = "new" Then
+                RevertedExml = RevertXmltoExmlNew(XMLString)
+            Else
+                RevertedExml = RevertXmltoExmlOld(XMLString)
+            End If
             If dlgXmlToExml.FileName.EndsWith(".exml.xml") Then
                 Dim NewFileName As String
                 NewFileName = dlgXmlToExml.FileName.Remove(dlgXmlToExml.FileName.Length - 4, 4)
@@ -36,7 +47,7 @@
         Next
     End Sub
 
-    Public Function ParseExmlStringOLD(RawExmlString As String)
+    Public Function ParseExmlStringOld(RawExmlString As String)
         Dim xdoc As New XDocument()
         xdoc = XDocument.Parse(RawExmlString)
         For Each element As XElement In xdoc.Descendants
@@ -63,7 +74,7 @@
         Return xdoc
     End Function
 
-    Public Function ParseExmlString(RawExmlString As String)
+    Public Function ParseExmlStringNew(RawExmlString As String)
         Dim xdoc As New XDocument()
         xdoc = XDocument.Parse(RawExmlString)
         For Each element As XElement In xdoc.Descendants
@@ -94,7 +105,7 @@
         Return xdoc
     End Function
 
-    Public Function RevertXmltoExml(XMLString As String)
+    Public Function RevertXmltoExmlNew(XMLString As String)
         Dim xdoc As New XDocument()
         xdoc = XDocument.Parse(XMLString)
         For Each element As XElement In xdoc.Descendants
@@ -115,7 +126,7 @@
         Return xdoc
     End Function
 
-    Public Function RevertXmltoExmlold(XMLString As String)
+    Public Function RevertXmltoExmlOld(XMLString As String)
         Dim xdoc As New XDocument()
         xdoc = XDocument.Parse(XMLString)
         For Each element As XElement In xdoc.Descendants
@@ -138,4 +149,13 @@
         Return xdoc
     End Function
 
+    Private Sub btnExmlToXmlOld_Click(sender As Object, e As EventArgs) Handles btnExmlToXmlOld.Click
+        method = "old"
+        dlgExmlToXml.ShowDialog()
+    End Sub
+
+    Private Sub btnXmlToExmlOld_Click(sender As Object, e As EventArgs) Handles btnXmlToExmlOld.Click
+        method = "old"
+        dlgXmlToExml.ShowDialog()
+    End Sub
 End Class
