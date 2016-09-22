@@ -36,7 +36,7 @@
         Next
     End Sub
 
-    Public Function ParseExmlString(RawExmlString As String)
+    Public Function ParseExmlStringOLD(RawExmlString As String)
         Dim xdoc As New XDocument()
         xdoc = XDocument.Parse(RawExmlString)
         For Each element As XElement In xdoc.Descendants
@@ -63,7 +63,59 @@
         Return xdoc
     End Function
 
+    Public Function ParseExmlString(RawExmlString As String)
+        Dim xdoc As New XDocument()
+        xdoc = XDocument.Parse(RawExmlString)
+        For Each element As XElement In xdoc.Descendants
+            If element.Name IsNot Nothing Then
+                element.SetAttributeValue("MainType", element.Name)                             ' Set MainType attribute As Data Or Property
+
+                If element.Attribute("template") IsNot Nothing Then                             ' Check if template
+                    element.SetAttributeValue("IsTemplate", True)
+                    element.Name = element.Attribute("template").Value
+                Else
+                    element.SetAttributeValue("IsTemplate", False)
+                End If
+
+                If element.Attribute("name") IsNot Nothing Then                                 ' Check for name
+                    element.Name = element.Attribute("name").Value                              ' Set element name
+                    If element.Attribute("name") = "Id" Then                                    ' If element is an Id element
+                        If element.Parent.Attribute("name") Is Nothing Then                     ' has a name attribute
+                            element.Parent.Name = element.Attribute("value").Value & "_parent"   ' and if not rename parent with Id_parent
+                        End If
+                    End If
+                    If element.Attribute("value") IsNot Nothing Then
+                        element.Value = element.Attribute("value")                              ' Set value
+                    End If
+                End If
+
+            End If
+        Next
+        Return xdoc
+    End Function
+
     Public Function RevertXmltoExml(XMLString As String)
+        Dim xdoc As New XDocument()
+        xdoc = XDocument.Parse(XMLString)
+        For Each element As XElement In xdoc.Descendants
+            If element.Attribute("MainType") IsNot Nothing Then                                 ' Rename element back to Data or Property
+                element.Name = element.Attribute("MainType").Value
+                Debug.Print("Element Name : " & element.Name.ToString)
+                element.Attribute("MainType").Remove()
+                If element.Attribute("IsTemplate") IsNot Nothing Then                           ' Remove IsTemplate attr if necessary
+                    element.Attribute("IsTemplate").Remove()
+                End If
+                If element.Value IsNot Nothing And element.Attribute("value") IsNot Nothing And element.Attribute("name") IsNot Nothing Then                                             ' Update value attr with element value and remove value
+                    Debug.Print("Element Value : " & element.ToString)
+                    element.SetAttributeValue("value", element.Value.ToString)
+                    element.SetValue("")
+                End If
+            End If
+        Next
+        Return xdoc
+    End Function
+
+    Public Function RevertXmltoExmlold(XMLString As String)
         Dim xdoc As New XDocument()
         xdoc = XDocument.Parse(XMLString)
         For Each element As XElement In xdoc.Descendants
@@ -71,7 +123,7 @@
                 If (element.Name Is "Data_root") Then
                     element.Name = element.Name.ToString.TrimEnd("_root")
                     Debug.Print(element.Name.ToString)
-                ElseIf (element.name.ToString Like "*_*") Then
+                ElseIf (element.Name.ToString Like "*_*") Then
                     Dim elementArr As Array
                     elementArr = element.Name.ToString.Split("_")
                     element.Name = elementArr.GetValue(0).ToString
