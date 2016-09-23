@@ -1,0 +1,11 @@
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\bin\Debug\exmlConverter.exe.config
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\obj\Debug\ExmlToXmlConverter.vbprojResolveAssemblyReference.cache
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\obj\Debug\exmlConverter.Form1.resources
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\obj\Debug\exmlConverter.Resources.resources
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\obj\Debug\ExmlToXmlConverter.vbproj.GenerateResource.Cache
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\bin\Debug\exmlConverter.exe
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\bin\Debug\exmlConverter.pdb
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\bin\Debug\exmlConverter.xml
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\obj\Debug\exmlConverter.exe
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\obj\Debug\exmlConverter.xml
+C:\Users\amfisher\Documents\GitHub\ExmlToXmlConverter\WindowsApplication2\obj\Debug\exmlConverter.pdb

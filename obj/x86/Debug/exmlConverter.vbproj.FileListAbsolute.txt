@@ -1,0 +1,2 @@
+C:\Users\amfisher\Documents\Visual Studio 2015\Projects\WindowsApplication2\bin\Debug\WindowsApplication.exe.config
+C:\Users\amfisher\Documents\Visual Studio 2015\Projects\WindowsApplication2\bin\Debug\exmlConverter.exe.config
